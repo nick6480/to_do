@@ -1,17 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const Book = require('../models/book')
-
-router.get('/', async function(req, res) {
-    let books
-    try {
-        books = await Book.find().sort({ createAt: 'desc'}).limit(10).exec()
-    } catch {
-        books = []
-    }
-    res.render('index', {
-        books: books
-    })
+const express = require('express');
+const router  = express.Router();
+const {ensureAuthenticated} = require('../config/auth') 
+//login page
+router.get('/', (req,res)=>{
+    res.render('welcome');
+})
+//register page
+router.get('/register', (req,res)=>{
+    res.render('register');
 })
 
-module.exports = router
+router.get('/dashboard',ensureAuthenticated,(req,res)=>{
+    res.render('dashboard',{
+        user: req.user
+    });
+})
+
+module.exports = router; 

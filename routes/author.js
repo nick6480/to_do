@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const Author = require('../models/author')
+const {ensureAuthenticated} = require('../config/auth') 
 
 
 // router to alle authors
-router.get('/', async function(req, res) {
+router.get('/', ensureAuthenticated, async function(req, res) {
     let searchOptions = {}
     if (req.query.name != null && req.query.name !== '') {
         searchOptions.name = new RegExp(req.query.name, 'i')
@@ -18,12 +19,12 @@ router.get('/', async function(req, res) {
 })
 
 // new author route
-router.get('/new', function(req, res){
+router.get('/new', ensureAuthenticated, function(req, res){
     res.render('authors/new', { author: new Author() })
 })
 
 // create author
-router.post('/', async function (req, res) {
+router.post('/', ensureAuthenticated, async function (req, res) {
     const author = new Author({
         name: req.body.name
     })
@@ -38,5 +39,5 @@ router.post('/', async function (req, res) {
         })
     }
 })
- 
+
 module.exports = router

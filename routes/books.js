@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const author = require('../models/author')
+const {ensureAuthenticated} = require('../config/auth') 
 
 
 // router to alle books
-router.get('/', async function(req, res) {
+router.get('/', ensureAuthenticated, async function(req, res) {
     let query = Book.find()
     if (req.query.title != null && req.query.title != '') {
         query = query.regex('title', new RegExp(req.query.title, 'i'))
@@ -29,20 +30,20 @@ router.get('/', async function(req, res) {
 })
 
 // new book route
-router.get('/new', async function(req, res) {
+router.get('/new', ensureAuthenticated, async function(req, res) {
     renderNewPage(res, new Book())
 })
 
 // create books
-router.post('/', async function (req, res) {
+router.post('/', ensureAuthenticated, async function (req, res) {
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
         publishDate: new Date(req.body.publishDate), //converter publishdate fra string til date
         pageCount: req.body.pageCount,
         description: req.body.description
-
     })
+
     try {
         const newBook = await book.save()
         res.redirect('books')

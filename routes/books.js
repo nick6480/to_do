@@ -50,6 +50,7 @@ router.post('/', ensureAuthenticated, async function (req, res) {
     } catch {
         renderNewPage(res, book, true)
     }
+    console.log(Book)
 })
  
 async function renderNewPage(res, book, hasError = false) {

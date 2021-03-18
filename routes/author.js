@@ -38,6 +38,7 @@ router.post('/', ensureAuthenticated, async function (req, res) {
             errorMessage: 'an error has occured'
         })
     }
+    console.log(Author)
 })
 
 module.exports = router

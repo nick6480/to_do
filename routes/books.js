@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const author = require('../models/author')
-const {ensureAuthenticated} = require('../config/auth') 
+const {ensureAuthenticated} = require('../config/auth')
 
 
 // router to alle books
@@ -39,7 +39,7 @@ router.post('/', ensureAuthenticated, async function (req, res) {
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
-        publishDate: new Date(req.body.publishDate), //converter publishdate fra string til date
+        publishDate: new Date(req.body.publishDate), //fra string til date
         pageCount: req.body.pageCount,
         description: req.body.description
     })
@@ -52,7 +52,7 @@ router.post('/', ensureAuthenticated, async function (req, res) {
     }
     console.log(Book)
 })
- 
+
 async function renderNewPage(res, book, hasError = false) {
     try {
         const authors = await author.find({})

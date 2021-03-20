@@ -9,7 +9,7 @@
       placeholder="Enter Name"
       value="<%= typeof name != 'undefined' ? name : '' %>"
     />
-  
+
 </div>
 <div>
     <label for="email">Email</label>
@@ -38,6 +38,14 @@
       value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
     />
   </div>
+  <div>
+    <label for="role">Choose role</label>
+    <select id="role" name="role">
+      <option value="admin">Admin</option>
+      <option value="basic">basic</option>
+    </select>
+  </div>
+  <br><br><br>
   <button type="submit" class="btn btn-primary btn-block">
     Register
   </button>

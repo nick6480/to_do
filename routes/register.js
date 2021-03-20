@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
-const passport = require('passport'); 
+const passport = require('passport');
 
 router.get('/register', (req,res)=>{
     res.render('register');
 })
 
 router.post('/', (req,res)=>{
-    const {name,email, password, password2} = req.body;
+    const {name,email, password, password2, role} = req.body;
     let errors = [];
-    console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password);
+    console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password+ ' role:' + role);
     if(!name || !email || !password || !password2) {
         errors.push({msg : "Please fill in all fields"})
     }
@@ -19,7 +19,7 @@ router.post('/', (req,res)=>{
     if(password !== password2) {
         errors.push({msg : "passwords dont match"});
     }
-    
+
     //check if password is more than 6 characters
     if(password.length < 6 ) {
         errors.push({msg : 'password atleast 6 characters'})
@@ -30,23 +30,26 @@ router.post('/', (req,res)=>{
         name : name,
         email : email,
         password : password,
-        password2 : password2})
+        password2 : password2,
+        role : req.body.role})
      } else {
         //validation passed
        User.findOne({email : email}).exec((err,user)=>{
-        console.log(user);   
+        console.log(user);
         if(user) {
             errors.push({msg: 'email already registered'});
-            res.render('register',{errors,name,email,password,password2})  
+            res.render('register',{errors,name,email,password,password2})
            } else {
             const newUser = new User({
                 name : name,
                 email : email,
-                password : password
+                password : password,
+                role : req.body.role
             });
-    
+
+            console.log(newUser);
             //hash password
-            bcrypt.genSalt(10,(err,salt)=> 
+            bcrypt.genSalt(10,(err,salt)=>
             bcrypt.hash(newUser.password,salt,
                 (err,hash)=> {
                     if(err) throw err;
@@ -60,7 +63,7 @@ router.post('/', (req,res)=>{
                         res.redirect('/login');
                     })
                     .catch(value=> console.log(value));
-                      
+
                 }));
              }
        })

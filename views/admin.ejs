@@ -1,1 +1,31 @@
 <h2>Admin Page</h2>
+
+<div>
+    <% users.forEach(function(user, i) { %>
+        <div>Name: <%= user.name  %></div>
+        <div>Email: <%= user.email %></div>
+        <div>Role: <%= user.role %> </div>
+        <div>
+        <br>
+        <form action="admin" method="POST">
+        <div>
+            <input type="hidden" name="choice" value="accept">
+            <input type="hidden" name="email" value="<%= user.email %>">
+        </div>
+          <button type="submit" class="btn btn-primary btn-block">Accept User</button>
+        </form>
+
+        <form action="admin" method="POST">
+        <div>
+            <input type="hidden" name="choice" value="decline">
+            <input type="hidden" name="email" value="<%= user.email %>">
+        </div>
+          <button type="submit" class="btn btn-primary btn-block">Decline User</button>
+        </form>
+        <% }) %>
+</div>
+
+
+
+
+<!--<script src="../public/javascript/postbtn.js"></script -->

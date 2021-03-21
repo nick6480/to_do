@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/user");
+const {User} = require("../models/user");
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
@@ -14,6 +14,6 @@ router.post('/', (req,res,next)=>{
         failureRedirect: '/',
         failureFlash : true
     })(req,res,next)
-    })
-    
+})
+
 module.exports = router;

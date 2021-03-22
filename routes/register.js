@@ -9,9 +9,9 @@ router.get('/register', (req,res)=>{
 })
 
 router.post('/', (req,res)=>{
-    const {name,email, password, password2, role} = req.body;
+    const {name,email, password, password2,} = req.body;
     let errors = [];
-    console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password+ ' role:' + role);
+    console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password);
     if(!name || !email || !password || !password2) {
         errors.push({msg : "Please fill in all fields"})
     }
@@ -31,7 +31,7 @@ router.post('/', (req,res)=>{
         email : email,
         password : password,
         password2 : password2,
-        role : req.body.role})
+        role : 'basic'})
      } else {
         //validation passed
 
@@ -54,7 +54,7 @@ router.post('/', (req,res)=>{
                     name : name,
                     email : email,
                     password : password,
-                    role : req.body.role
+                    role : 'basic'
                     }
 
 

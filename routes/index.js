@@ -38,31 +38,61 @@ router.post('/admin', async function(req, res) {
   console.log("req recived")
   //console.log(req.body)
 
+  console.log(req.body)
+  switch (req.body.formInstance) {
+    case 'pendingUser':
+      console.log('pendingUser')
 
-  if (req.body.choice == 'decline') {
-      UserReq.findOneAndDelete({email: req.body.email}, function(err,obj) {
+      if (req.body.choice == 'decline') {
+          UserReq.findOneAndDelete({email: req.body.email}, function(err,obj) {
+            if (err) {
+              console.log(err)
+            }
+            console.log('Declined user: ', obj)
+          });
+      } else if (req.body.choice == 'accept') {
+          UserReq.findOne({email: req.body.email}, async function(err,obj) { return obj })
+          .then(res =>{ //callback function
+              user = new User(res)
+              user.isNew = true;
+              console.log(user)
+              user.save(function(error, savedDocument) {
+                  if (error) console.log(error)
+                  else {
+                    console.log(savedDocument + " has been saved");
+                    UserReq.findOneAndDelete({email: req.body.email}, function(err,obj) {})
+                  }
+
+              })
+          })
+
+      }
+
+
+    break;
+    case 'userRole':
+      console.log(req.body.userRole)
+
+      // `doc` is the document _after_ `update` was applied because of
+      // `returnOriginal: false`
+      User.findOneAndUpdate({email: req.body.email}, { role: req.body.userRole }, function(err,obj) {
         if (err) {
           console.log(err)
         }
-        console.log('Declined user: ', obj)
+        console.log('changes role for user: ', obj)
       });
-  } else if (req.body.choice == 'accept') {
-      UserReq.findOne({email: req.body.email}, async function(err,obj) { return obj })
-      .then(res =>{ //callback function
-          user = new User(res)
-          user.isNew = true;
-          console.log(user)
-          user.save(function(error, savedDocument) {
-              if (error) console.log(error)
-              else {
-                console.log(savedDocument + " has been saved");
-                UserReq.findOneAndDelete({email: req.body.email}, function(err,obj) {})
-              }
 
-          })
-      })
+
+
+
+    break;
+    default:
 
   }
+
+
+
+
 
   res.redirect('/admin')
 })

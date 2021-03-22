@@ -9,6 +9,9 @@ router.get('/register', (req,res)=>{
 })
 
 router.post('/', (req,res)=>{
+
+
+
     const {name,email, password, password2,} = req.body;
     let errors = [];
     console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password);

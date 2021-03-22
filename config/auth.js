@@ -11,7 +11,9 @@ module.exports = {
       return (req, res, next) => {
 
         //console.log(res.locals.currentUser = req.user)
-        //console.log('User role: ' + req.user.role);
+        console.log('User role: ' + req.user.role);
+        //console.log(req.user)
+
         if(req.user.role !== role) {
           res.status(401)
           return res.send('You do not have permission to view this page')

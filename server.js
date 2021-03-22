@@ -73,7 +73,7 @@ process.stdin.on('data', function (text) {
     case 'quit':
       done();
     break;
-    case 'admin':
+    case 'setup-admin':
       admin();
     break;
     default:

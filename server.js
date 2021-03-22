@@ -12,6 +12,9 @@ const flash = require('connect-flash') //
 const session = require('express-session') //
 const passport = require('passport') //
 
+
+const admin = require('./admin')
+
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/author')
 const bookRouter = require('./routes/books')
@@ -56,6 +59,37 @@ app.use('/login', loginRouter)
 app.use('/logout', logoutRouter)
 
 require('./config/passport')(passport)
+
+
+
+// CMD comands
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+process.stdin.on('data', function (text) {
+  console.log(text);
+
+  switch (text.trim()) {
+    case 'quit':
+      done();
+    break;
+    case 'admin':
+      admin();
+    break;
+    default:
+
+  }
+});
+
+function done() {
+  console.log('Server process ended');
+  process.exit();
+}
+
+
+
+
+
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,

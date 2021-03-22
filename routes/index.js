@@ -62,8 +62,6 @@ router.post('/admin', async function(req, res) {
           })
       })
 
-
-
   }
 
   res.redirect('/admin')

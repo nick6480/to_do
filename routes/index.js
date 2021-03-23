@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser  = require("body-parser");
 const router  = express.Router();
 const {ensureAuthenticated, authRole} = require('../config/auth')
-const {ROLE} = require('../config/permissions')
+const {ROLE} = require('../config/roles')
 const {UserReq, User} = require("../models/user");
 
 //login page

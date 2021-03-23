@@ -1,4 +1,6 @@
 
+
+// NOT IN USE
 var btns = Array.prototype.slice.call(document.querySelectorAll(".btn"))
 
 console.log(btns);

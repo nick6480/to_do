@@ -12,8 +12,7 @@ const flash = require('connect-flash') //
 const session = require('express-session') //
 const passport = require('passport') //
 
-
-const admin = require('./admin')
+const {adminSetup, done} = require('./config/terminalcomands')
 
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/author')
@@ -21,7 +20,7 @@ const bookRouter = require('./routes/books')
 const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
-
+const toDoRouter = require('./routes/to-do')
 
 
 app.set('view engine', 'ejs');
@@ -54,6 +53,7 @@ app.use((req,res,next)=> {
 app.use('/', indexRouter)
 app.use('/author', authorRouter)
 app.use('/books', bookRouter)
+app.use('/to-do', toDoRouter)
 app.use('/register', registerRouter)
 app.use('/login', loginRouter)
 app.use('/logout', logoutRouter)
@@ -73,18 +73,15 @@ process.stdin.on('data', function (text) {
     case 'quit':
       done();
     break;
-    case 'setup-admin':
-      admin();
+    case 'admin-setup':
+      adminSetup();
     break;
     default:
 
   }
 });
 
-function done() {
-  console.log('Server process ended');
-  process.exit();
-}
+
 
 
 

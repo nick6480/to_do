@@ -10,8 +10,6 @@ router.get('/register', (req,res)=>{
 
 router.post('/', (req,res)=>{
 
-
-
     const {name,email, password, password2,} = req.body;
     let errors = [];
     console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password);
@@ -61,13 +59,8 @@ router.post('/', (req,res)=>{
                     }
 
 
-                    // If role is admin skip admin authentication (for debug purporse)
-                    if (userObj.role == 'admin') {
-                      var newUser = new User(userObj);
-                    } else {
-                      var newUser = new UserReq(userObj);
-                    }
-
+    
+                     var newUser = new UserReq(userObj);
                      console.log(newUser);
                      //hash password
                      bcrypt.genSalt(10,(err,salt)=>

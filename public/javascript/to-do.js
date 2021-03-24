@@ -42,12 +42,15 @@ function archive(i) {
       }
     }
 
+
+
     let toDoObj = {
       title : toDoArr[0],
       text : toDoArr[1],
       startdate : toDoArr[2],
       deadline : toDoArr[3],
       priority : toDoArr[4],
+      id : toDoArr[5],
       formInstance : 'archive'
     }
     console.log(toDoObj)
@@ -86,14 +89,6 @@ function postAjax(url, data, success) {
 
 
 
-
-
-
-
-
-
-
-
 function editToggle(i) {
    return function() {
        ////console.log(this.id);
@@ -110,21 +105,12 @@ function editToggle(i) {
       let editBtn = document.getElementById(`editBtn${num}`)
       let delBtn = document.getElementById(`delBtn${num}`)
 
-      if (editBtn.innerHTML == "Edit") {
-        editBtn.innerHTML = "Save"
-        delBtn.innerHTML = 'Discard'
-      } else {
-        editBtn.innerHTML = "Edit"
-        delBtn.innerHTML = 'Archive'
-      }
 
 
-
-
-
-
+      let toDoArr = [];
 
       for (var i = 0; i < todo.children.length; i++) {
+
         if (!todo.children[i].classList.contains("btns")) {
           for (var o = 0; o < todo.children[i].children.length; o++) {
             if (todo.children[i].children[o].classList.contains("value")) {
@@ -144,6 +130,7 @@ function editToggle(i) {
                 span.classList.add("value");
                 span.innerHTML = todo.children[i].children[o].value;
 
+                toDoArr.push(todo.children[i].children[o].value)
 
                 todo.children[i].replaceChild(span, todo.children[i].children[o]);
               }
@@ -156,6 +143,28 @@ function editToggle(i) {
         }
       }
 
+
+
+      if (editBtn.innerHTML == "Edit") {
+        editBtn.innerHTML = "Save"
+        delBtn.innerHTML = 'Discard'
+      } else if (editBtn.innerHTML == "Save") {
+        editBtn.innerHTML = "Edit"
+        delBtn.innerHTML = 'Archive'
+
+        let toDoObj = {
+          title : toDoArr[0],
+          text : toDoArr[1],
+          startdate : toDoArr[2],
+          deadline : toDoArr[3],
+          priority : toDoArr[4],
+          id : toDoArr[5],
+          formInstance : 'update'
+        }
+        console.log(toDoObj)
+        postAjax('to-do', toDoObj, function(data){ console.log(data); });
+
+      }
 
 
    };

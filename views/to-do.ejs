@@ -81,6 +81,10 @@
                   <span class="value"><%= todo.priority  %></span>
                 </div>
 
+                <div>
+                  <span class="property">Id:</span>
+                  <span class="value"><%= todo._id  %></span>
+                </div>
 
                 <div id="btns<%=i %>" class="btns">
                   <button id="editBtn<%=i %>" type="button" name="edit">Edit</button>
@@ -121,7 +125,9 @@
                 <div class="priority">
                   <span class="property">Priority:</span>
                   <span class="value"><%= todo.priority  %></span>
-                </div>
+                </div> 
+
+
               </div>
             <% }) %>
         </div>

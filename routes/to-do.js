@@ -23,8 +23,6 @@ router.get('/', ensureAuthenticated, async function(req, res) {
                 todos: todoData
             });
         });
-
-
    });
 
 
@@ -39,6 +37,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
   switch (req.body.formInstance) {
     case 'create':
+
     toDoObj = {
       title : req.body.title,
       text : req.body.text,
@@ -61,8 +60,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
     break;
     case 'archive':
 
-      console.log(req.body)
-
       toDoObj = {
         title : req.body.title,
         text : req.body.text,
@@ -74,7 +71,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
       let toDoArcive = new ToDoArchive(toDoObj);
 
-      ToDo.findOneAndDelete({owner: req.user._id}, async function(err,obj) { return obj })
+      ToDo.findOneAndDelete({_id: req.body.id}, async function(err,obj) { return obj })
       toDoArcive.save(function(error, savedDocument) {
           if (error) console.log(error)
           else {
@@ -82,12 +79,53 @@ router.post('/', ensureAuthenticated, (req,res)=>{
           }
       })
 
+    break;
+    case "update":
+
+
+    toDoObj = {
+      title : req.body.title,
+      text : req.body.text,
+      startdate : req.body.startdate,
+      deadline : req.body.deadline,
+      priority : req.body.priority,
+      owner : req.user._id
+    }
+
+
+    ToDo.findOneAndUpdate({_id: req.body.id}, toDoObj, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+
+    console.log(doc);
+  });
+
+
+
+
+
 
 
 
 
     break;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    default:
+    console.log(req.body)
   }
 
 })

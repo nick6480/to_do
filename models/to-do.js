@@ -27,8 +27,9 @@ const ToDoSchema  = new mongoose.Schema({
 });
 
 const ToDo = mongoose.model('toDo',ToDoSchema);
-
+const ToDoArchive = mongoose.model('toDoArchive',ToDoSchema);
 
 module.exports = {
   ToDo,
+  ToDoArchive
 }

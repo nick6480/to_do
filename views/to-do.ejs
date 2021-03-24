@@ -54,7 +54,7 @@
       <div id="toDoWrap">
           <%var i = 0; %>
           <% todos.forEach(todo => { %>
-              <div class="toDo" id="todo<%=i++ %>">
+              <div class="toDo" id="todo<%=i %>">
 
                 <div class="title">
                   <span class="property">Title:</span>
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="deadline">
-                  <spanspan class="property">Deadline:</span>
+                  <span class="property">Deadline:</span>
                   <span class="value"><%= todo.deadline.toDateString()  %></span>
                 </div>
 
@@ -86,7 +86,7 @@
                   <button id="editBtn<%=i %>" type="button" name="edit">Edit</button>
                   <button id="delBtn<%=i %>"type="button" name="archive">Archive</button>
                 </div>
-
+                <%i++ %>
               </div>
 
           <% }) %>
@@ -95,7 +95,35 @@
     <div class="wrap">
         <h2>Archived To-do's</h2>
         <div>
+          <% todoArchived.forEach(todo => { %>
+              <div class="toDo">
 
+                <div class="title">
+                  <span class="property">Title:</span>
+                  <span class="value"><%= todo.title%></span>
+                </div>
+
+                <div class="text">
+                  <span class="property">Text:</span>
+                  <span class="value"><%= todo.text  %></span>
+                </div>
+
+                <div class="startdate">
+                  <span class="property">Startdate:</span>
+                  <span class="value"><%= todo.startdate.toDateString()%></span>
+                </div>
+
+                <div class="deadline">
+                  <span class="property">Deadline:</span>
+                  <span class="value"><%= todo.deadline.toDateString()  %></span>
+                </div>
+
+                <div class="priority">
+                  <span class="property">Priority:</span>
+                  <span class="value"><%= todo.priority  %></span>
+                </div>
+              </div>
+            <% }) %>
         </div>
     </div>
 

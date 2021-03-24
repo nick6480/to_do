@@ -125,7 +125,6 @@ function editToggle(i) {
 
 
       for (var i = 0; i < todo.children.length; i++) {
-
         if (!todo.children[i].classList.contains("btns")) {
           for (var o = 0; o < todo.children[i].children.length; o++) {
             if (todo.children[i].children[o].classList.contains("value")) {

@@ -21,7 +21,7 @@ const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
 const toDoRouter = require('./routes/to-do')
-
+const adminRouter = require('./routes/admin')
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')
@@ -60,6 +60,7 @@ app.use('/to-do', toDoRouter)
 app.use('/register', registerRouter)
 app.use('/login', loginRouter)
 app.use('/logout', logoutRouter)
+app.use('/admin', adminRouter)
 
 require('./config/passport')(passport)
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {ensureAuthenticated, authRole} = require('../config/auth')
-
+const {ROLE} = require('../config/roles')
 const {ToDo, ToDoArchive} = require("../models/to-do");
 
 
@@ -11,13 +11,24 @@ router.get('/', ensureAuthenticated, async function(req, res) {
 
   //console.log(req.user._id)
   let toDoData;
+  let query = {owner: req.user._id}
 
 
-  ToDo.find({owner: req.user._id}, function(err, obj) {
+/*
+  if (req.user.role == ROLE.ADMIN) {
+    query = {}
+  } else {
+    query = {owner: req.user._id};
+  }
+*/
+
+
+  console.log(query);
+  ToDo.find(query, function(err, obj) {
 
       var todoData = obj
 
-       ToDoArchive.find({owner: req.user._id}, function(err, data) {
+       ToDoArchive.find(query, function(err, data) {
             res.render('to-do', {
                 todoArchived: data,
                 todos: todoData

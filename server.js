@@ -15,8 +15,8 @@ const passport = require('passport') //
 const {adminSetup, done} = require('./config/terminalcomands')
 
 const indexRouter = require('./routes/index')
-const authorRouter = require('./routes/author')
-const bookRouter = require('./routes/books')
+//const authorRouter = require('./routes/author')
+//const bookRouter = require('./routes/books')
 const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
@@ -54,8 +54,8 @@ app.use((req,res,next)=> {
 
 
 app.use('/', indexRouter)
-app.use('/author', authorRouter)
-app.use('/books', bookRouter)
+//app.use('/author', authorRouter)
+//app.use('/books', bookRouter)
 app.use('/to-do', toDoRouter)
 app.use('/register', registerRouter)
 app.use('/login', loginRouter)
@@ -103,7 +103,7 @@ mongoose.connection.on('open', function (ref) {
     console.log('Connected to mongo server.');
     //trying to get collection names
     mongoose.connection.db.listCollections().toArray(function (err, names) {
-        console.log(names); // [{ name: 'dbname.myCollection' }]
+        //console.log(names); // [{ name: 'dbname.myCollection' }]
         module.exports.Collection = names;
     });
 })

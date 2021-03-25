@@ -26,6 +26,9 @@ const toDoRouter = require('./routes/to-do')
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
+app.set("todoInputs", "layouts/todoInputs")
+
+
 
 app.use('/public', express.static('public'));
 app.use(expressEjsLayouts);

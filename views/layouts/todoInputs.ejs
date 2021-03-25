@@ -1,0 +1,36 @@
+<div class="toDo" id="todo<%=i %>">
+
+  <div class="title">
+    <span class="property">Title:</span>
+    <span class="value"><%= todo.title%></span>
+  </div>
+
+  <div class="text">
+    <span class="property">Text:</span>
+    <span class="value"><%= todo.text  %></span>
+  </div>
+
+  <div class="startdate">
+    <span class="property">Startdate:</span>
+    <span class="value"><%= todo.startdate.toDateString()%></span>
+  </div>
+
+  <div class="deadline">
+    <span class="property">Deadline:</span>
+    <span class="value"><%= todo.deadline.toDateString()  %></span>
+  </div>
+
+  <div class="priority">
+    <span class="property">Priority:</span>
+    <span class="value"><%= todo.priority  %></span>
+  </div>
+
+  <div class="hidden">
+    <span class="property">Id:</span>
+    <span class="value"><%= todo._id  %></span>
+  </div>
+
+  <div id="btns<%=i %>" class="btns">
+    <button id="editBtn<%=i %>" type="button" name="edit">Edit</button>
+    <button id="delBtn<%=i %>"type="button" name="archive">Archive</button>
+  </div>

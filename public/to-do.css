@@ -37,3 +37,7 @@ section article {
 
   width: 300px;
 }
+
+.hidden {
+  display: none;
+}

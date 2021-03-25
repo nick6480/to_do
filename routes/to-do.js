@@ -81,8 +81,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
     break;
     case "update":
-
-
     toDoObj = {
       title : req.body.title,
       text : req.body.text,
@@ -100,30 +98,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
     console.log(doc);
   });
-
-
-
-
-
-
-
-
-
     break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     default:
     console.log(req.body)
   }

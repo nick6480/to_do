@@ -15,7 +15,6 @@ for (var i = 0; i < delBtns.length; i++) {
 
 
 
-
 function archive(i) {
   return function() {
 
